@@ -20,4 +20,4 @@ jobs:
         username: u123262960.mltcorporate.com  # FTP Username
         password: Mlt@7072  # FTP Password
         local-dir: ./  # Path to the files to upload (e.g., index.html in the root of your repo)
-        server-dir: public_html/test/  # Path to the test subdomain folder on Hostinger
+        server-dir: /public_html/test/  # Path to the test subdomain folder on Hostinger
