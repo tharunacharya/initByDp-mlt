@@ -3,7 +3,7 @@ name: Deploy to Hostinger
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch
+      - main # Or your deployment branch
 
 jobs:
   deploy:
@@ -13,23 +13,30 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Install Dependencies
-      run: |
-        composer install --no-dev --optimize-autoloader
-        npm install
-        npm run build
-
-    - name: Deploy via SSH
-      uses: appleboy/ssh-action@v0.1.6
+    - name: Set Up PHP
+      uses: shivammathur/setup-php@v2
       with:
-        host: your-hostinger-domain.com
-        username: your-username
-        key: ${{ secrets.SSH_KEY }}
-        port: 22
-        script: |
-          cd /path/to/your/project
-          git pull origin main
-          composer install --no-dev --optimize-autoloader
-          php artisan migrate --force
-          php artisan cache:clear
-          php artisan config:cache
+        php-version: '8.1' # Adjust according to your Laravel version
+        extensions: mbstring, intl, bcmath
+
+    - name: Install Composer Dependencies
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: Upload Files via FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.HOSTINGER_SERVER }}
+        username: ${{ secrets.HOSTINGER_USERNAME }}
+        password: ${{ secrets.HOSTINGER_PASSWORD }}
+        local-dir: ./ # Change if your Laravel files are in a subfolder
+        server-dir: /public_html # Adjust this for Hostinger's file structure
+
+    - name: Run Laravel Commands
+      run: |
+        ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.HOSTINGER_SERVER }} << 'EOF'
+        cd /path/to/your/laravel/project
+        php artisan migrate --force
+        php artisan config:cache
+        php artisan route:cache
+        php artisan view:cache
+        EOF
