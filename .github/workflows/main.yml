@@ -3,7 +3,7 @@ name: Deploy Static Site to Hostinger
 on:
   push:
     branches:
-      - main  # Or your deployment branch
+      - main  # Or your deployment 
 
 jobs:
   deploy:
