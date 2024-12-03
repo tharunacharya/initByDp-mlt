@@ -29,7 +29,7 @@ jobs:
         username: ${{ secrets.HOSTINGER_USERNAME }}
         password: ${{ secrets.HOSTINGER_PASSWORD }}
         local-dir: ./ # Change if your Laravel files are in a subfolder
-        server-dir: /public_html # Adjust this for Hostinger's file structure
+        server-dir: /public_html/test # Adjust this for Hostinger's file structure
 
     - name: Run Laravel Commands
       run: |
