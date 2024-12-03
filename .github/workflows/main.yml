@@ -3,7 +3,7 @@ name: Deploy Static Site to Hostinger
 on:
   push:
     branches:
-      - main  # Or your deployment 
+      - main  # Or your deployment branch
 
 jobs:
   deploy:
@@ -16,9 +16,8 @@ jobs:
     - name: Upload Files via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        server: ${{ secrets.HOSTINGER_SERVER }}
-        username: ${{ secrets.HOSTINGER_USERNAME }}
-        password: ${{ secrets.HOSTINGER_PASSWORD }}
-        local-dir: ./  # Assuming index.html is in the root of your repository
-        server-dir: /files/public_html/test/  # Path to the subdomain folder in Hostinger
-
+        server: ftp://mltcorporate.com  # FTP Server
+        username: u123262960.mltcorporate.com  # FTP Username
+        password: Mlt@7072  # FTP Password
+        local-dir: ./  # Path to the files to upload (e.g., index.html in the root of your repo)
+        server-dir: public_html/test/  # Path to the test subdomain folder on Hostinger
