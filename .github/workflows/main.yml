@@ -20,5 +20,5 @@ jobs:
         username: ${{ secrets.HOSTINGER_USERNAME }}
         password: ${{ secrets.HOSTINGER_PASSWORD }}
         local-dir: ./  # Assuming index.html is in the root of your repository
-        server-dir: /files/public_html/test  # Path to the subdomain folder in Hostinger
+        server-dir: /files/public_html/test/  # Path to the subdomain folder in Hostinger
 
