@@ -1,0 +1,11 @@
+/framework/vendor/
+
+
+/node_modules/
+
+.env
+.env.* 
+
+# IDE-specific files
+.vscode/
+.idea/
