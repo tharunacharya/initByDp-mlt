@@ -79,6 +79,7 @@ Route::namespace ('Api')->middleware(['throttle', 'auth:api'])->group(function (
 	Route::post('/confirm-payment', 'DriversApi@confirm_payment');
 	Route::post('/active-drivers', 'DriversApi@active_drivers');
 	Route::post('update-fcm-token', 'UsersApi@update_fcm');
+	Route::post('/driver_status','DriversApi@one');
 
 	// live location api
 	Route::get('/locations', [LocationController::class, 'getVehicleDriverLocations']);
