@@ -71,7 +71,7 @@ Route::namespace ('Api')->middleware(['throttle', 'auth:api'])->group(function (
 	Route::post('/upcoming-rides', 'DriversApi@upcomingRides');
 	Route::post('/completed-rides', 'DriversApi@completedRides');
 	Route::post('/cancelled-rides', 'DriversApi@cancelledRides');
-
+	Route::post('/to-pickup', 'DriversApi@to_pickup');
 	Route::post('/single-ride-info', 'DriversApi@single_ride_info');
 	Route::post('/start-ride', 'DriversApi@start_ride');
 	Route::post('/start-ride', 'DriversApi@start_ride');

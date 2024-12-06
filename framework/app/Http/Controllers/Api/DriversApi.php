@@ -930,52 +930,52 @@ public function cancelledRides(Request $request)
 
 	}
 
-
-public function to_pickup(Request $request)
-{
-    // Validate the input
-    $request->validate([
-        'booking_id' => 'required|exists:bookings,id', // Ensure booking_id exists in the bookings table
-    ]);
-
-    // Retrieve the booking details using the booking_id from the request
-    $booking = Bookings::find($request->get('booking_id'));
-
-    // If the booking doesn't exist, return an error message
-    if (!$booking) {
-        return response()->json([
-            'success' => 0,
-            'message' => 'Booking not found!',
-            'data' => []
-        ], 404);
-    }
-
-    // Get the pickup address and other details
-   $pickup_address = $booking->pickup_addr;
-   $pickup_lat = $booking->start_lat;
-   $pickup_long = $booking->start_long;
-
-    // If pickup address is not found, return an error message
-    if (!$pickup_address) {
-        return response()->json([
-            'success' => 0,
-            'message' => 'Pickup address not available!',
-            'data' => []
-        ], 404);
-    }
-
-    // Return the pickup details as a response
-    return response()->json([
-        'success' => 1,
-        'message' => 'Pickup address retrieved successfully.',
-        'data' => [
-            'booking_id' => $booking->id,
-            'pickup_address' => $pickup_address,
-            'pickup_lat' => $booking->start_lat,
-            'pickup_long' => $booking->start_long,
-        ]
-    ], 200);
-}
+	public function to_pickup(Request $request)
+	{
+		// Validate the input
+		$request->validate([
+			'booking_id' => 'required|exists:bookings,id', // Ensure booking_id exists in the bookings table
+		]);
+	log::info($request->all());
+		// Retrieve the booking details using the booking_id from the request
+		$booking = Bookings::find($request->get('booking_id'));
+	
+		// If the booking doesn't exist, return an error message
+		if (!$booking) {
+			return response()->json([
+				'success' => 0,
+				'message' => 'Booking not found!',
+				'data' => []
+			], 404);
+		}
+	
+		// Get the pickup address and other details
+	   $pickup_address = $booking->pickup_addr;
+	   $pickup_lat = $booking->pickup_lat;
+	   $pickup_long = $booking->pickup_long;
+	
+		// If pickup address is not found, return an error message
+		if (!$pickup_address) {
+			return response()->json([
+				'success' => 0,
+				'message' => 'Pickup address not available!',
+				'data' => []
+			], 404);
+		}
+	
+		// Return the pickup details as a response
+		return response()->json([
+			'success' => 1,
+			'message' => 'Pickup address retrieved successfully.',
+			'data' => [
+				'booking_id' => $booking->id,
+				'pickup_address' => $pickup_address,
+				'pickup_lat' => $booking->pickup_lat,
+				'pickup_long' => $booking->pickup_long,
+			]
+		], 200);
+	}
+	
 
 
 
